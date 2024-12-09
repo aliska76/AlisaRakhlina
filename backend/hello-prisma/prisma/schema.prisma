@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id      Int     @default(autoincrement()) @id
+  title   String
+  number_of_rooms Int @default(0)
+  price   Float
+  floor   Int?
+  contact String
+  address Address @relation(fields: [id], references: [id])
+}
+
+model Address {
+  id        Int      @default(autoincrement()) @id
+  state     String
+  city      String
+  street    String
+  number    Int?
+  properties Property[]
+}
