@@ -1,18 +1,18 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { PropertiesServer } from './properties.server';
+import { PropertiesService } from './properties.service';
 import { Property as PropertyModel } from '@prisma/client';
 
 @Controller('properties')
 export class PropertiesController {
-  constructor(private readonly propertyServer: PropertiesServer) {}
+  constructor(private readonly propertyService: PropertiesService) {}
 
   @Get()
   getProperty(): Promise<PropertyModel[]> {
-    return this.propertyServer.properties({});
+    return this.propertyService.properties({});
   }
 
   @Get(':id')
   getPropertyById(@Param('id') id: Number ): Promise<PropertyModel> {
-    return this.propertyServer.property({ id: Number(id) })
+    return this.propertyService.property({ id: Number(id) })
   }
 }

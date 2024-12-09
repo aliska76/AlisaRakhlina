@@ -3,7 +3,7 @@ import { PrismaService } from '../prisma.service'
 import { Property, Prisma } from '@prisma/client';
 
 @Injectable()
-export class PropertiesServer {
+export class PropertiesService {
     constructor(private prisma: PrismaService) {}
 
     async property(

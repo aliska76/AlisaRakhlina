@@ -1,18 +1,31 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { AddressesServer } from './addresses.server';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { AddressesService } from './addresses.service';
 import { Address as AddressModel } from '@prisma/client';
+import { PropertiesService } from '../properties/properties.service';
 
 @Controller('address')
 export class AddressesController {
-  constructor(private readonly addressServer: AddressesServer) {}
+  constructor(
+    private readonly addressService: AddressesService,
+    private readonly propertyService: PropertiesService
+  ) {}
 
   @Get()
-  getAddress(): Promise<AddressModel[]> {
-    return this.addressServer.addresses({});
+  async getAddress(): Promise<AddressModel[]> {
+    return this.addressService.addresses({});
   }
 
   @Get(':id')
-  getAddressById(@Param('id') id: Number ): Promise<AddressModel> {
-    return this.addressServer.address({ id: Number(id) })
+  async getAddressById(@Param('id') id: Number ): Promise<AddressModel> {
+    return this.addressService.address({ id: Number(id) })
   }
+
+  // @Post()
+  // async createAdress(@Body() addressData: { state: string; city: string; street: string, number: number }): Promise<AddressModel> {
+  //   const { state, city, street, number } = addressData;
+    
+  //   return this.addressService.createAddress({ state, city, street, number, properties: {
+  //     connect: { properties: }
+  //   } })
+  // }
 }
