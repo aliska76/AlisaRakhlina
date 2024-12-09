@@ -29,7 +29,8 @@ export class PropertiesController {
      floor: number; 
      contact: string }): Promise<PropertyModel> {
     const { title, number_of_rooms, price, floor, contact } = propertsData;
-    console.log(propertsData);
+    
     return this.propertyService.createProperty({ title, number_of_rooms, price, floor, contact })
   }
 }
+// Invoke-WebRequest -Uri "http://localhost:3000/properies -Method POST -Body '{ "title": "Appartment1", "number_of_rooms": 3, "price": 1000000, "floor": 2, "contact": "Jack Sparrow" }' -ContentType "application/json"
