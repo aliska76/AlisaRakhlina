@@ -21,6 +21,7 @@ export class PropertiesController {
     return this.propertyService.deleteProperty({ id: Number(id) })
   }
 
+  // Invoke-WebRequest -Uri "http://localhost:3000/properties/2" -Method PUT -Body '{"title": "Penthouse"}' -ContentType "application/json"
   @Put(':id')
   async publishPost(@Param('id') id: Number, 
   @Body() updateData: { 
@@ -37,7 +38,8 @@ export class PropertiesController {
     });
   }
 
-  @Post()
+// Invoke-WebRequest -Uri "http://localhost:3000/properies -Method POST -Body '{"title": "Appartment1", "number_of_rooms": 3, "price": 1000000, "floor": 2, "contact": "Jack Sparrow"}' -ContentType "application/json"  
+@Post()
   async creteProperty(@Body() propertsData: { 
       title: string; 
       number_of_rooms: number;
@@ -49,4 +51,3 @@ export class PropertiesController {
     return this.propertyService.createProperty({ title, number_of_rooms, price, floor, contact })
   }
 }
-// Invoke-WebRequest -Uri "http://localhost:3000/properies -Method POST -Body '{ "title": "Appartment1", "number_of_rooms": 3, "price": 1000000, "floor": 2, "contact": "Jack Sparrow" }' -ContentType "application/json"

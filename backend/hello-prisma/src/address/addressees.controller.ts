@@ -37,6 +37,7 @@ export class AddressesController {
     });
   }
 
+  //Invoke-WebRequest -Uri "http://localhost:3000/address/3" -Method DELETE
   @Delete(':id')
   async deleteAddress(@Param('id') id: Number): Promise<AddressModel> {
     return this.addressService.deleteAddress({ id: Number(id) })
