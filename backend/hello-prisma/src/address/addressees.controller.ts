@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Delete, Put } from '@nestjs/common';
 import { AddressesService } from './addresses.service';
 import { Address as AddressModel } from '@prisma/client';
 import { PropertiesService } from '../properties/properties.service';
@@ -25,6 +25,16 @@ export class AddressesController {
     const { state, city, street, number } = addressData;
     
     return this.addressService.createAddress({ state, city, street, number })
+  }
+
+  @Put(':id')
+  async publishPost(@Param('id') id: Number, 
+  @Body() updateData: { state?: string; city?: string; street?: string; number?: number }
+): Promise<AddressModel> {
+    return this.addressService.updateAddress({
+      where: { id: Number(id) },
+      data: updateData,
+    });
   }
 
   @Delete(':id')

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Delete, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Delete, Post, Body, Put } from '@nestjs/common';
 import { PropertiesService } from './properties.service';
 import { Property as PropertyModel } from '@prisma/client';
 
@@ -21,13 +21,29 @@ export class PropertiesController {
     return this.propertyService.deleteProperty({ id: Number(id) })
   }
 
+  @Put(':id')
+  async publishPost(@Param('id') id: Number, 
+  @Body() updateData: { 
+      title?: string; 
+      number_of_rooms?: number;
+      price?: number; 
+      floor?: number; 
+      contact?: string 
+    }
+): Promise<PropertyModel> {
+    return this.propertyService.updateProperty({
+      where: { id: Number(id) },
+      data: updateData,
+    });
+  }
+
   @Post()
   async creteProperty(@Body() propertsData: { 
-    title: string; 
-    number_of_rooms: number;
-     price: number; 
-     floor: number; 
-     contact: string }): Promise<PropertyModel> {
+      title: string; 
+      number_of_rooms: number;
+      price: number; 
+      floor: number; 
+      contact: string }): Promise<PropertyModel> {
     const { title, number_of_rooms, price, floor, contact } = propertsData;
     
     return this.propertyService.createProperty({ title, number_of_rooms, price, floor, contact })
