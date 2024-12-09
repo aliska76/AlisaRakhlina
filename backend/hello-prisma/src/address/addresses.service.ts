@@ -44,7 +44,7 @@ export class AddressesService {
         const { where, data } = params;
         return this.prisma.address.update({
           data,
-          where,
+          where
         });
       }
 
