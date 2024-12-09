@@ -31,9 +31,23 @@ export class AddressesService {
         });
       }
 
-      async createAddress(data: Prisma.AddressCreateInput): Promise<Address> {
+      async createAddress(data: Prisma.AddressCreateInput & { properties?: Omit<Prisma.PropertyCreateInput, 'address'>[] }): Promise<Address> {
+        const { properties, ...addressData } = data;
+
         return this.prisma.address.create({
-          data,
+          data: {
+            ...addressData,
+            properties: properties ? {
+              create: data.properties.map((property) => ({
+                title: property.title,
+                number_of_rooms: property.number_of_rooms,
+                price: property.price,
+                floor: property.floor,
+                contact: property.contact,
+              })),
+            }
+          : undefined
+          }
         });
       }
 

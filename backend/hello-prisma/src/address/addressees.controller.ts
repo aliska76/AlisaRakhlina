@@ -21,7 +21,21 @@ export class AddressesController {
   }
 
   @Post()
-  async createAdress(@Body() addressData: { state: string; city: string; street: string; number: number }): Promise<AddressModel> {
+  async createAddress( @Body()
+  addressData: {
+    state: string;
+    city: string;
+    street: string;
+    number?: number;
+    properties?: {
+      id: number
+      title: string;
+      number_of_rooms: number;
+      price: number;
+      floor?: number;
+      contact: string;
+    }[]
+  }): Promise<AddressModel> {
     const { state, city, street, number } = addressData;
     
     return this.addressService.createAddress({ state, city, street, number })
