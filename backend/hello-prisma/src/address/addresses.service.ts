@@ -37,7 +37,7 @@ export class AddressesService {
         });
       }
 
-      async updateUser(params: {
+      async updateAddress(params: {
         where: Prisma.AddressWhereUniqueInput;
         data: Prisma.AddressUpdateInput;
       }): Promise<Address> {
@@ -48,7 +48,7 @@ export class AddressesService {
         });
       }
 
-      async deleteUser(where: Prisma.AddressWhereUniqueInput): Promise<Address> {
+      async deleteAddress(where: Prisma.AddressWhereUniqueInput): Promise<Address> {
         return this.prisma.address.delete({
           where,
         });

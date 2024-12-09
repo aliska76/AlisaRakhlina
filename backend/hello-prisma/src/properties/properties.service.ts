@@ -37,7 +37,7 @@ export class PropertiesService {
         });
       }
 
-      async updateUser(params: {
+      async updateProperty(params: {
         where: Prisma.PropertyWhereUniqueInput;
         data: Prisma.PropertyUpdateInput;
       }): Promise<Property> {
@@ -48,7 +48,7 @@ export class PropertiesService {
         });
       }
 
-      async deleteUser(where: Prisma.PropertyWhereUniqueInput): Promise<Property> {
+      async deleteProperty(where: Prisma.PropertyWhereUniqueInput): Promise<Property> {
         return this.prisma.property.delete({
           where,
         });
